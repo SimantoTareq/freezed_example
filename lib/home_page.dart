@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_example/model/Fperson_model.dart';
 import 'package:freezed_example/model/person_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<PersonModel> personList =[
     PersonModel(name: 'Tareq Hossain'),
-    PersonModel(name: 'John'),
+    PersonModel(name: null),
     PersonModel(name: 'xxx'),
     
 
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: personList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(personList[index].name.toString()),
+            title: Text(personList[index].name ?? " "),
 
 
           );
@@ -31,19 +32,16 @@ class _HomePageState extends State<HomePage> {
       },),
       floatingActionButton: FloatingActionButton(onPressed: () {
         PersonModel personModel = PersonModel(name: "Tareq");
-        PersonModel personModel1 = PersonModel(name: "Tareq");
         
         Map<String, dynamic> data = {
-          'name' : 'Tareq Hossain', 
+          'name' : null, 
 
         };
-        PersonModel model = PersonModel.fromJson(data);
+        FpersonModel model = FpersonModel.fromJson(data);
         print(model.name.toString());
-        model =   model.copyWith(name: 'new value');
-        print(personModel.hashCode.toString());
-        
+        model =   model.copyWith(name: 'new value');        
       
-        print(model.name.toString());
+        print( "Value :" +model.name.toString());
 
       },),
     );
